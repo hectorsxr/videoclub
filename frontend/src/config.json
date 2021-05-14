@@ -1,0 +1,8 @@
+{
+  "services": {
+    "backend": {
+      "hostname": "localhost",
+      "port": 4000
+    }
+  }
+}

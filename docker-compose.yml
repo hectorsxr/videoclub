@@ -1,0 +1,76 @@
+version: "2"
+
+x-common-variables: &common-variables
+  MYSQL_USER: user
+  MYSQL_PASSWORD: pass
+  MYSQL_DATABASE: db_
+
+services:
+  frontend:
+    image: frontend:local
+    command: npm run start
+    build:
+      context: ./frontend/
+      dockerfile: Dockerfile.dev
+    depends_on:
+      - backend
+    volumes:
+      - "./frontend:/app"
+    ports:
+      - 3000:3000
+    links:
+      - backend
+    restart: unless-stopped
+
+  backend:
+    image: backend:local
+    command: npm run dev
+    build: 
+      context: ./backend/
+      dockerfile: Dockerfile.dev
+    depends_on:
+      - mysql-db
+    networks:
+      - frontend
+      - backend
+    environment:
+      <<: *common-variables
+      MYSQL_HOST_IP: mysql-db
+    volumes:
+      - "./backend:/app"
+    ports:
+      - "4000:4000"
+    restart: unless-stopped
+    
+  mysql-db:
+    image: mysql:5.7
+    networks:
+      - backend
+    environment:
+      <<: *common-variables
+      MYSQL_HOST: localhost
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - ./db/video.sql:/docker-entrypoint-initdb.d/video.sql
+    ports:
+      - 3306:3306
+    restart: unless-stopped
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    networks:
+      - backend
+    depends_on:
+      - mysql-db
+    environment:
+      PMA_HOST: mysql-db
+      PMA_PORT: 3306
+    links:
+      - mysql-db:mysql-db
+    ports:
+      - 8080:80
+    restart: always
+
+networks:
+  frontend:
+  backend:
