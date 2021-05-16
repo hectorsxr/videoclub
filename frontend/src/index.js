@@ -1,8 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Login from './pages/login';
+import App from './App';
+import { Provider } from 'react-redux';
+import store from './store';
+
+const Application = () => {
+  return (
+    <Provider store={store}>
+      <App />
+    </Provider>
+  );
+};
 
 ReactDOM.render(
-  <Login />,
+  <Application />,
   document.getElementById('root')
 );

@@ -1,8 +1,8 @@
 import React from "react";
-import LoginForm from "../components/login";
+import RegisterForm from "../components/Register";
 
 export default function Login() {
   return (
-    <LoginForm />
+    <RegisterForm />
   );
 }

@@ -51,7 +51,7 @@ services:
       MYSQL_HOST: localhost
       MYSQL_ROOT_PASSWORD: root
     volumes:
-      - ./db/video.sql:/docker-entrypoint-initdb.d/video.sql
+      - ./db/db.sql:/docker-entrypoint-initdb.d/db.sql
     ports:
       - 3306:3306
     restart: unless-stopped

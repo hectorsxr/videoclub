@@ -4,7 +4,7 @@ import "./css/login.css";
 
 const http = new HttpInstance();
 
-class App extends Component {
+class ListMovies extends Component {
   state = {
     movies: []
   };
@@ -38,4 +38,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default ListMovies;
