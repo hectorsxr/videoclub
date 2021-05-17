@@ -12,9 +12,9 @@ async function login(req, res) {
             item.scope = scope?.scope;
         }
 
-        res.send(data)
+        res.send(data);
     } catch(err) {
-        res.send(err)
+        res.send(err);
     }
 }
 
@@ -25,7 +25,7 @@ async function register(req, res) {
     if (!username || !password) {
         res.send({
             statusCode: 400,
-            message: 'No username or password'
+            message: 'No username or password',
         });
 
         return;
