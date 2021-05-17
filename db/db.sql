@@ -44,15 +44,17 @@ INSERT INTO scopes (scope, user_id) VALUES ('admin', @myID2);
 
 CREATE TABLE movies (
   id INT(20) NOT NULL,
-  name varchar(100) NOT NULL
+  name VARCHAR(100) NOT NULL,
+  rented BIT NOT NULL,
+  userId INT(20)
 );
 
 
-INSERT INTO movies (id, name) VALUES
-(1, 'Saw'),
-(2, 'Lord of the ring'),
-(3, 'Pulp Fiction'),
-(4, 'Harry Potter');
+INSERT INTO movies (id, name, rented, userId) VALUES
+(1, 'Saw', 0, null),
+(2, 'Lord of the ring', 0, null),
+(3, 'Pulp Fiction', 0, null),
+(4, 'Harry Potter', 0, null);
 
 
 ALTER TABLE movies
